@@ -5,28 +5,24 @@ class Weapons
     // properties
     private $weapon_id;
     private $weapon_type;
-    private $weapon_name;
-    private $weapon_dmg;
-    private $weapon_element;
-    private $weapon_elementType;
-    private $weapon_affinity;
-    private $weapon_sharpness;
-    private $weapon_image;
+    private $difficulty_using;
+    private $difficulty_mastering;
+    private $weapon_info;
+    private $weapon_logo;
+    private $weapon_overview;
     private $conn;
 
     // constructor
-    public function __construct($weapon_id, $weapon_type, $weapon_name, $weapon_dmg, $weapon_element, $weapon_elementType, 
-    $weapon_affinity, $weapon_sharpness, $weapon_image, $conn)
+    public function __construct($weapon_id, $weapon_type, $difficulty_using, $difficulty_mastering, $weapon_info, $weapon_logo,
+     $weapon_overview, $conn)
     {
         $this->weapon_id = $weapon_id;
         $this->weapon_type = $weapon_type;
-        $this->weapon_name = $weapon_name;
-        $this->weapon_dmg = $weapon_dmg;
-        $this->weapon_element = $weapon_element;
-        $this->weapon_elementType = $weapon_elementType;
-        $this->weapon_affinity = $weapon_affinity;
-        $this->weapon_sharpness = $weapon_sharpness;
-        $this->weapon_image = $weapon_image;
+        $this->difficulty_using = $difficulty_using;
+        $this->difficulty_mastering = $difficulty_mastering;
+        $this->weapon_info = $weapon_info;
+        $this->weapon_logo = $weapon_logo;
+        $this->weapon_overview = $weapon_overview;
         $this->conn = $conn;
     }
 
@@ -41,39 +37,29 @@ class Weapons
         return $this->weapon_type;
     }
 
-    public function getWeaponName()
+    public function getDifficultyUsing()
     {
-        return $this->weapon_name;
+        return $this->difficulty_using;
     }
 
-    public function getWeaponDmg()
+    public function getDifficultyMastering()
     {
-        return $this->weapon_dmg;
+        return $this->difficulty_mastering;
     }
 
-    public function getWeaponElement()
+    public function getWeaponInfo()
     {
-        return $this->weapon_element;
-    }   
-
-    public function getWeaponElementType()
-    {
-        return $this->weapon_elementType;
+        return $this->weapon_info;
     }
 
-    public function getWeaponAffinity()
+    public function getWeaponLogo()
     {
-        return $this->weapon_affinity;
+        return $this->weapon_logo;
     }
 
-    public function getWeaponSharpness()
+    public function getWeaponOverview()
     {
-        return $this->weapon_sharpness;
-    }
-
-    public function getWeaponImage()
-    {
-        return $this->weapon_image;
+        return $this->weapon_overview;
     }
 
     // setters
@@ -81,144 +67,154 @@ class Weapons
     {
         $this->weapon_id = $weapon_id;
     }
-    
+
     public function setWeaponType($weapon_type)
     {
         $this->weapon_type = $weapon_type;
     }
 
-    public function setWeaponName($weapon_name)
+    public function setDifficultyUsing($difficulty_using)
     {
-        $this->weapon_name = $weapon_name;
+        $this->difficulty_using = $difficulty_using;
     }
 
-    public function setWeaponDmg($weapon_dmg)
+    public function setDifficultyMastering($difficulty_mastering)
     {
-        $this->weapon_dmg = $weapon_dmg;
+        $this->difficulty_mastering = $difficulty_mastering;
     }
 
-    public function setWeaponElement($weapon_element)
+    public function setWeaponInfo($weapon_info)
     {
-        $this->weapon_element = $weapon_element;
-    }   
-
-    public function setWeaponElementType($weapon_elementType)
-    {
-        $this->weapon_elementType = $weapon_elementType;
+        $this->weapon_info = $weapon_info;
     }
 
-    public function setWeaponAffinity($weapon_affinity)
+    public function setWeaponLogo($weapon_logo)
     {
-        $this->weapon_affinity = $weapon_affinity;
+        $this->weapon_logo = $weapon_logo;
     }
 
-    public function setWeaponSharpness($weapon_sharpness)
+    public function setWeaponOverview($weapon_overview)
     {
-        $this->weapon_sharpness = $weapon_sharpness;
-    }
-
-    public function setWeaponImage($weapon_image)
-    {
-        $this->weapon_image = $weapon_image;
+        $this->weapon_overview = $weapon_overview;
     }
 
     // methods
-    // create weapon
+
+    // create
     public function createWeapon()
     {
         // define the query
-        $sql = "INSERT INTO weapons (weapon_type, weapon_name, weapon_dmg, weapon_element, weapon_elementType, weapon_affinity, 
-        weapon_sharpness, weapon_image) VALUES 
-        (:weapon_type, :weapon_name, :weapon_dmg, :weapon_element, :weapon_elementType, :weapon_affinity, :weapon_sharpness, :weapon_image)";
+        $sql = "INSERT INTO weapons (weapon_type, difficulty_using, difficulty_mastering, weapon_info, weapon_logo, weapon_overview) VALUES 
+        (:weapon_type, :difficulty_using, :difficulty_mastering, :weapon_info, :weapon_logo, :weapon_overview)";
 
-        try {
+        try{
             // prepare the statement
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($query);
 
             // bind the parameters
             $stmt->bindParam(':weapon_type', $this->weapon_type);
-            $stmt->bindParam(':weapon_name', $this->weapon_name);
-            $stmt->bindParam(':weapon_dmg', $this->weapon_dmg);
-            $stmt->bindParam(':weapon_element', $this->weapon_element);
-            $stmt->bindParam(':weapon_elementType', $this->weapon_elementType);
-            $stmt->bindParam(':weapon_affinity', $this->weapon_affinity);
-            $stmt->bindParam(':weapon_sharpness', $this->weapon_sharpness);
-            $stmt->bindParam(':weapon_image', $this->weapon_image);
+            $stmt->bindParam(':difficulty_using', $this->difficulty_using);
+            $stmt->bindParam(':difficulty_mastering', $this->difficulty_mastering);
+            $stmt->bindParam(':weapon_info', $this->weapon_info);
+            $stmt->bindParam(':weapon_logo', $this->weapon_logo);
+            $stmt->bindParam(':weapon_overview', $this->weapon_overview);
 
             // execute the query
             $stmt->execute();
-        } catch (PDOException $e) {
+        } catch(PDOException $e){
             echo "Error: " . $e->getMessage();
         }
     }
 
-    // read all weapons
+    // read
     public function readWeapon()
     {
         // define the query
         $sql = "SELECT * FROM weapons";
 
-        try {
+        try{
             // prepare the statement
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($query);
 
             // execute the query
             $stmt->execute();
 
-            // fetch the results
-            $weapons = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // return the results
-            return $weapons;
-        } catch (PDOException $e) {
+            // return the result
+            return $stmt;
+        } catch(PDOException $e){
             echo "Error: " . $e->getMessage();
         }
     }
 
-    public function updateWeapon()
+    // read single
+    public function readSingleWeapon()
     {
         // define the query
-        $sql = "UPDATE weapons SET weapon_type = :weapon_type, weapon_name = :weapon_name, weapon_dmg = :weapon_dmg, 
-        weapon_element = :weapon_element, weapon_elementType = :weapon_elementType, weapon_affinity = :weapon_affinity, 
-        weapon_sharpness = :weapon_sharpness, weapon_image = :weapon_image WHERE weapon_id = :weapon_id";
+        $sql = "SELECT * FROM weapons WHERE weapon_id = :weapon_id";
 
-        try {
+        try{
             // prepare the statement
-            $stmt = $this->conn->prepare($sql);
-
-            // bind the parameters
-            $stmt->bindParam(':weapon_type', $this->weapon_type);
-            $stmt->bindParam(':weapon_name', $this->weapon_name);
-            $stmt->bindParam(':weapon_dmg', $this->weapon_dmg);
-            $stmt->bindParam(':weapon_element', $this->weapon_element);
-            $stmt->bindParam(':weapon_elementType', $this->weapon_elementType);
-            $stmt->bindParam(':weapon_affinity', $this->weapon_affinity);
-            $stmt->bindParam(':weapon_sharpness', $this->weapon_sharpness);
-            $stmt->bindParam(':weapon_image', $this->weapon_image);
-
-            // execute the query
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-    // delete weapon
-    public function deleteWeapon()
-    {
-        // define the query
-        $sql = "DELETE FROM weapons WHERE weapon_id = :weapon_id";
-
-        try {
-            // prepare the statement
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($query);
 
             // bind the parameters
             $stmt->bindParam(':weapon_id', $this->weapon_id);
 
             // execute the query
             $stmt->execute();
-        } catch (PDOException $e) {
+
+            // fetch the result
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // return the result
+            return $result;
+        } catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    // update
+    public function updateWeapon()
+    {
+        // define the query
+        $sql = "UPDATE weapons SET weapon_type = :weapon_type, difficulty_using = :difficulty_using, difficulty_mastering = :difficulty_mastering, 
+        weapon_info = :weapon_info, weapon_logo = :weapon_logo, weapon_overview = :weapon_overview WHERE weapon_id = :weapon_id";
+
+        try{
+            // prepare the statement
+            $stmt = $this->conn->prepare($query);
+
+            // bind the parameters
+            $stmt->bindParam(':weapon_type', $this->weapon_type);
+            $stmt->bindParam(':difficulty_using', $this->difficulty_using);
+            $stmt->bindParam(':difficulty_mastering', $this->difficulty_mastering);
+            $stmt->bindParam(':weapon_info', $this->weapon_info);
+            $stmt->bindParam(':weapon_logo', $this->weapon_logo);
+            $stmt->bindParam(':weapon_overview', $this->weapon_overview);
+            $stmt->bindParam(':weapon_id', $this->weapon_id);
+
+            // execute the query
+            $stmt->execute();
+        } catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    // delete
+    public function deleteWeapon()
+    {
+        // define the query
+        $sql = "DELETE FROM weapons WHERE weapon_id = :weapon_id";
+
+        try{
+            // prepare the statement
+            $stmt = $this->conn->prepare($query);
+
+            // bind the parameters
+            $stmt->bindParam(':weapon_id', $this->weapon_id);
+
+            // execute the query
+            $stmt->execute();
+        } catch(PDOException $e){
             echo "Error: " . $e->getMessage();
         }
     }
