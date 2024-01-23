@@ -1,0 +1,228 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(https://images5.alphacoders.com/901/901108.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  
+  
+  #nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    li {
+        display: inline;
+        margin-right: 20px;
+    }
+  
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+    }
+  }
+  
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  :root {
+  --background-color: rgba(255, 255, 255, 0.7);
+  --header-color: #333;
+  --text-color: #000000;
+  --textarea: #fff;
+  --transition-duration: 0.6s;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
+  }
+  
+  .dark-mode {
+  --background-color: rgba(37, 37, 37, 0.8);
+  --header-color: #fff;
+  --text-color: #ccc;
+  --table-bg: rgba(37, 37, 37, 0);
+  --table-text: #ccc;
+  --form-bg: rgba(37, 37, 37, 0);
+  --form-text: #ffffff;
+  --form-label: #fff;
+  --textarea: #4d4d4d;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--background-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: background-color var(--transition-duration);
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+        color: var(--header-color);
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        text-align: center;
+        line-height: 1.5;
+        color: var(--text-color);
+        margin-bottom: 20px;
+    }
+
+    #icon {
+        width: calc(50% - 20px);
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    #render {
+        width: calc(50% - 20px);
+        float: left;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    #info {
+        clear: both;
+        margin-bottom: 20px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        display: block; /* To prevent extra space below the image */
+    }
+
+    iframe {
+        width: 100%;
+        max-width: 800px;
+        height: 315px;
+        border: none;
+        border-radius: 10px;
+        display: block; /* To prevent extra space below the iframe */
+    }
+}
+
+
+
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--table-bg);
+    
+    th {
+        border-bottom: 3px solid rgb(123, 123, 123);
+        color: var(--table-text);
+    }
+    
+    td {
+        padding: 10px;
+        border-bottom: 3px solid rgb(123, 123, 123);
+        color: var(--table-text);
+    }
+  }
+  
+  #img {
+    width: 170px;
+    height: 170px;
+    border-radius: 10%;
+    margin-left: 150px;
+  }
+  
+  #img2 {
+    width: 400px;
+    height: 250px;
+    border-radius: 10%;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: var(--form-bg); /* Apply dark mode background color */
+    
+    label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        color: var(--form-label);
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    textarea {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: var(--textarea);
+        color: var(--form-text);
+    }
+    
+    button {
+        background-color: gray;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s;
+        
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        & + button {
+            background-color: #ccc;
+        }
+        
+        &:hover {
+            background-color: darken(gray, 10%);
+        }
+        
+        button[type="submit"] {
+            margin-top: 1rem;
+        }
+    }
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: rgb(192, 192, 192);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: darken(rgb(192, 192, 192), 10%);
+  }

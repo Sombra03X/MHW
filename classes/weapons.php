@@ -3,7 +3,6 @@
 class Weapons
 {
     // properties
-    private $weapon_id;
     private $weapon_type;
     private $difficulty_using;
     private $difficulty_mastering;
@@ -13,15 +12,14 @@ class Weapons
     private $conn;
 
     // constructor
-    public function __construct($weapon_id, $weapon_type, $difficulty_using, $difficulty_mastering, $weapon_info, $weapon_logo,
+    public function __construct($weapon_type, $difficulty_using, $difficulty_mastering, $weapon_info, $weapon_icon,
      $weapon_overview, $conn)
     {
-        $this->weapon_id = $weapon_id;
         $this->weapon_type = $weapon_type;
         $this->difficulty_using = $difficulty_using;
         $this->difficulty_mastering = $difficulty_mastering;
         $this->weapon_info = $weapon_info;
-        $this->weapon_logo = $weapon_logo;
+        $this->weapon_logo = $weapon_icon;
         $this->weapon_overview = $weapon_overview;
         $this->conn = $conn;
     }
@@ -52,7 +50,7 @@ class Weapons
         return $this->weapon_info;
     }
 
-    public function getWeaponLogo()
+    public function getWeaponIcon()
     {
         return $this->weapon_logo;
     }
@@ -88,7 +86,7 @@ class Weapons
         $this->weapon_info = $weapon_info;
     }
 
-    public function setWeaponLogo($weapon_logo)
+    public function setWeaponIcon($weapon_logo)
     {
         $this->weapon_logo = $weapon_logo;
     }
@@ -104,8 +102,8 @@ class Weapons
     public function createWeapon()
     {
         // define the query
-        $sql = "INSERT INTO weapons (weapon_type, difficulty_using, difficulty_mastering, weapon_info, weapon_logo, weapon_overview) VALUES 
-        (:weapon_type, :difficulty_using, :difficulty_mastering, :weapon_info, :weapon_logo, :weapon_overview)";
+        $sql = "INSERT INTO weapons (weapon_type, difficulty_using, difficulty_mastering, weapon_info, weapon_icon, weapon_overview) VALUES 
+        (:weapon_type, :difficulty_using, :difficulty_mastering, :weapon_info, :weapon_icon, :weapon_overview)";
 
         try{
             // prepare the statement
@@ -116,7 +114,7 @@ class Weapons
             $stmt->bindParam(':difficulty_using', $this->difficulty_using);
             $stmt->bindParam(':difficulty_mastering', $this->difficulty_mastering);
             $stmt->bindParam(':weapon_info', $this->weapon_info);
-            $stmt->bindParam(':weapon_logo', $this->weapon_logo);
+            $stmt->bindParam(':weapon_icon', $this->weapon_icon);
             $stmt->bindParam(':weapon_overview', $this->weapon_overview);
 
             // execute the query
@@ -177,7 +175,7 @@ class Weapons
     {
         // define the query
         $sql = "UPDATE weapons SET weapon_type = :weapon_type, difficulty_using = :difficulty_using, difficulty_mastering = :difficulty_mastering, 
-        weapon_info = :weapon_info, weapon_logo = :weapon_logo, weapon_overview = :weapon_overview WHERE weapon_id = :weapon_id";
+        weapon_info = :weapon_info, weapon_icon = :weapon_icon, weapon_overview = :weapon_overview WHERE weapon_id = :weapon_id";
 
         try{
             // prepare the statement
@@ -188,7 +186,7 @@ class Weapons
             $stmt->bindParam(':difficulty_using', $this->difficulty_using);
             $stmt->bindParam(':difficulty_mastering', $this->difficulty_mastering);
             $stmt->bindParam(':weapon_info', $this->weapon_info);
-            $stmt->bindParam(':weapon_logo', $this->weapon_logo);
+            $stmt->bindParam(':weapon_icon', $this->weapon_icon);
             $stmt->bindParam(':weapon_overview', $this->weapon_overview);
             $stmt->bindParam(':weapon_id', $this->weapon_id);
 

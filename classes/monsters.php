@@ -2,33 +2,22 @@
 
 class Monsters
 {
-    // properties
-    private $monster_id;
     private $monster_name;
     private $monster_type;
-    private $monster_threatLevel;
-    private $monster_weakness1;
-    private $monster_weakness2;
-    private $monster_blight;
-    private $monster_status;
-    private $monster_image;
-    private $monster_characteristics;
+    private $monster_icon;
+    private $monster_render;
+    private $monster_info;
+    private $monster_cutscene;
     private $conn;
 
-    // constructor
-    public function __construct($monster_id, $monster_name, $monster_type, $monster_threatLevel, $monster_weakness1, $monster_weakness2,
-    $monster_blight, $monster_status, $monster_image, $monster_characteristics, $conn)
+    public function __construct($monster_name, $monster_type, $monster_icon, $monster_render, $monster_info, $monster_cutscene, $conn)
     {
-        $this->monster_id = $monster_id;
         $this->monster_name = $monster_name;
         $this->monster_type = $monster_type;
-        $this->monster_threatLevel = $monster_threatLevel;
-        $this->monster_weakness1 = $monster_weakness1;
-        $this->monster_weakness2 = $monster_weakness2;
-        $this->monster_blight = $monster_blight;
-        $this->monster_status = $monster_status;
-        $this->monster_image = $monster_image;
-        $this->monster_characteristics = $monster_characteristics;
+        $this->monster_icon = $monster_icon;
+        $this->monster_render = $monster_render;
+        $this->monster_info = $monster_info;
+        $this->monster_cutscene = $monster_cutscene;
         $this->conn = $conn;
     }
 
@@ -48,39 +37,24 @@ class Monsters
         return $this->monster_type;
     }
 
-    public function getMonsterThreatLevel()
+    public function getMonsterIcon()
     {
-        return $this->monster_threatLevel;
+        return $this->monster_icon;
     }
 
-    public function getMonsterWeakness1()
+    public function getMonsterRender()
     {
-        return $this->monster_weakness1;
+        return $this->monster_render;
     }
 
-    public function getMonsterWeakness2()
+    public function getMonsterInfo()
     {
-        return $this->monster_weakness2;
+        return $this->monster_info;
     }
 
-    public function getMonsterBlight()
+    public function getMonsterCutscene()
     {
-        return $this->monster_blight;
-    }
-
-    public function getMonsterStatus()
-    {
-        return $this->monster_status;
-    }
-
-    public function getMonsterImage()
-    {
-        return $this->monster_image;
-    }
-
-    public function getMonsterCharacteristics()
-    {
-        return $this->monster_characteristics;
+        return $this->monster_cutscene;
     }
 
     // setters
@@ -99,140 +73,148 @@ class Monsters
         $this->monster_type = $monster_type;
     }
 
-    public function setMonsterThreatLevel($monster_threatLevel)
+    public function setMonsterIcon($monster_icon)
     {
-        $this->monster_threatLevel = $monster_threatLevel;
+        $this->monster_icon = $monster_icon;
     }
 
-    public function setMonsterWeakness1($monster_weakness1)
+    public function setMonsterRender($monster_render)
     {
-        $this->monster_weakness1 = $monster_weakness1;
+        $this->monster_render = $monster_render;
     }
 
-    public function setMonsterWeakness2($monster_weakness2)
+    public function setMonsterInfo($monster_info)
     {
-        $this->monster_weakness2 = $monster_weakness2;
+        $this->monster_info = $monster_info;
     }
 
-    public function setMonsterBlight($monster_blight)
+    public function setMonsterCutscene($monster_cutscene)
     {
-        $this->monster_blight = $monster_blight;
-    }
-
-    public function setMonsterStatus($monster_status)
-    {
-        $this->monster_status = $monster_status;
-    }
-
-    public function setMonsterImage($monster_image)
-    {
-        $this->monster_image = $monster_image;
-    }
-
-    public function setMonsterCharacteristics($monster_characteristics)
-    {
-        $this->monster_characteristics = $monster_characteristics;
+        $this->monster_cutscene = $monster_cutscene;
     }
 
     // methods
-    // create monster
-    public function CreateMonster()
+    // create
+    public function addMonster()
     {
         // define the query
-        $sql = "INSERT INTO monsters (monster_name, monster_type, monster_threatLevel, monster_weakness1, monster_weakness2, monster_blight,
-        monster_status, monster_image, monster_characteristics) VALUES (:monster_name, :monster_type, :monster_threatLevel, :monster_weakness1, 
-        :monster_weakness2, :monster_blight, :monster_status, :monster_image, :monster_characteristics)";
+        $sql = "INSERT INTO monsters (monster_name, monster_type, monster_icon, monster_render, monster_info, monster_cutscene) VALUES 
+        (:monster_name, :monster_type, :monster_icon, :monster_render, :monster_info, :monster_cutscene)";
 
-        try {
+        try
+        {
             // prepare the statement
             $stmt = $this->conn->prepare($sql);
 
             // bind the parameters
             $stmt->bindParam(':monster_name', $this->monster_name);
             $stmt->bindParam(':monster_type', $this->monster_type);
-            $stmt->bindParam(':monster_threatLevel', $this->monster_threatLevel);
-            $stmt->bindParam(':monster_weakness1', $this->monster_weakness1);
-            $stmt->bindParam(':monster_weakness2', $this->monster_weakness2);
-            $stmt->bindParam(':monster_blight', $this->monster_blight);
-            $stmt->bindParam(':monster_status', $this->monster_status);
-            $stmt->bindParam(':monster_image', $this->monster_image);
-            $stmt->bindParam(':monster_characteristics', $this->monster_characteristics);
+            $stmt->bindParam(':monster_icon', $this->monster_icon);
+            $stmt->bindParam(':monster_render', $this->monster_render);
+            $stmt->bindParam(':monster_info', $this->monster_info);
+            $stmt->bindParam(':monster_cutscene', $this->monster_cutscene);
 
-            // execute the query
+            // execute statement
             $stmt->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
-    // read monster
-    public function ReadMonster()
+    public function readAllMonsters()
     {
         // define the query
         $sql = "SELECT * FROM monsters";
 
-        try {
+        try
+        {
             // prepare the statement
             $stmt = $this->conn->prepare($sql);
 
-            // execute the query
+            // execute statement
             $stmt->execute();
 
-            // fetch the results
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // fetch monsters
+            $monsters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // return the results
-            return $result;
+            // return monsters
+            return $monsters;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
-    // update monster
-    public function UpdateMonster()
+    public function readMonster()
     {
         // define the query
-        $sql = "UPDATE monsters SET monster_name = :monster_name, monster_type = :monster_type, monster_threatLevel = :monster_threatLevel, 
-        monster_weakness1 = :monster_weakness1, monster_weakness2 = :monster_weakness2, monster_blight = :monster_blight, monster_status = :monster_status, 
-        monster_image = :monster_image, monster_characteristics = :monster_characteristics WHERE monster_id = :monster_id";
+        $sql = "SELECT * FROM monsters WHERE monster_id = :monster_id";
 
-        try {
+        try
+        {
+            // prepare the statement
+            $stmt = $this->conn->prepare($sql);
+
+            // bind the parameter
+            $stmt->bindParam(':monster_id', $this->monster_id);
+
+            // execute statement
+            $stmt->execute();
+
+            // fetch monster
+            $monster = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // return monster
+            if ($monster)
+            {
+                return $monster;
+            } else {
+                echo "Monster not found.";
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function updateMonster()
+    {
+        // define the query
+        $sql = "UPDATE monsters SET monster_name = :monster_name, monster_type = :monster_type, monster_icon = :monster_icon, 
+        monster_render = :monster_render, monster_info = :monster_info, monster_cutscene = :monster_cutscene WHERE monster_id = :monster_id";
+
+        try
+        {
             // prepare the statement
             $stmt = $this->conn->prepare($sql);
 
             // bind the parameters
             $stmt->bindParam(':monster_name', $this->monster_name);
             $stmt->bindParam(':monster_type', $this->monster_type);
-            $stmt->bindParam(':monster_threatLevel', $this->monster_threatLevel);
-            $stmt->bindParam(':monster_weakness1', $this->monster_weakness1);
-            $stmt->bindParam(':monster_weakness2', $this->monster_weakness2);
-            $stmt->bindParam(':monster_blight', $this->monster_blight);
-            $stmt->bindParam(':monster_status', $this->monster_status);
-            $stmt->bindParam(':monster_image', $this->monster_image);
-            $stmt->bindParam(':monster_characteristics', $this->monster_characteristics);
-            $stmt->bindParam(':monster_id', $this->monster_id);
+            $stmt->bindParam(':monster_icon', $this->monster_icon);
+            $stmt->bindParam(':monster_render', $this->monster_render);
+            $stmt->bindParam(':monster_info', $this->monster_info);
+            $stmt->bindParam(':monster_cutscene', $this->monster_cutscene);
 
-            // execute the query
+            // execute statement
             $stmt->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
-    // delete monster
-    public function DeleteMonster()
+    public function deleteMonster()
     {
         // define the query
         $sql = "DELETE FROM monsters WHERE monster_id = :monster_id";
 
-        try {
+        try
+        {
             // prepare the statement
             $stmt = $this->conn->prepare($sql);
 
-            // bind the parameters
+            // bind the parameter
             $stmt->bindParam(':monster_id', $this->monster_id);
 
-            // execute the query
+            // execute statement
             $stmt->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
