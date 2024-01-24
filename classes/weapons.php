@@ -7,7 +7,7 @@ class Weapons
     private $difficulty_using;
     private $difficulty_mastering;
     private $weapon_info;
-    private $weapon_logo;
+    private $weapon_icon;
     private $weapon_overview;
     private $conn;
 
@@ -19,7 +19,7 @@ class Weapons
         $this->difficulty_using = $difficulty_using;
         $this->difficulty_mastering = $difficulty_mastering;
         $this->weapon_info = $weapon_info;
-        $this->weapon_logo = $weapon_icon;
+        $this->weapon_icon = $weapon_icon;
         $this->weapon_overview = $weapon_overview;
         $this->conn = $conn;
     }
@@ -52,7 +52,7 @@ class Weapons
 
     public function getWeaponIcon()
     {
-        return $this->weapon_logo;
+        return $this->weapon_icon;
     }
 
     public function getWeaponOverview()
@@ -86,9 +86,9 @@ class Weapons
         $this->weapon_info = $weapon_info;
     }
 
-    public function setWeaponIcon($weapon_logo)
+    public function setWeaponIcon($weapon_icon)
     {
-        $this->weapon_logo = $weapon_logo;
+        $this->weapon_icon = $weapon_icon;
     }
 
     public function setWeaponOverview($weapon_overview)

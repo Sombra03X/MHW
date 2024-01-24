@@ -2,6 +2,7 @@
 require 'header.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     require '../classes/users.php'; // requires the Users class
     require '../classes/dbh.php'; // requires the database handler
 
@@ -12,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = new Users(NULL, $username, $password, NULL, NULL, $conn);
 
     $user1 = $user->readUser();
-
     // verify the password
     if ($user1 && password_verify($password, $user1['password'])) {
 

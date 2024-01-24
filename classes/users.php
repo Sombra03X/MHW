@@ -205,10 +205,10 @@ class Users
             $stmt->bindParam(':user_id', $this->user_id);
 
             // Include password binding only if a new password is provided
-             if ($newPassword !== null) {
+            // if ($newPassword) {
                  $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                  $stmt->bindParam(':password', $hashedPassword);
-             }
+             //}
 
             // Execute the query
             $stmt->execute();
