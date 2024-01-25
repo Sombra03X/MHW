@@ -107,7 +107,7 @@ class Weapons
 
         try{
             // prepare the statement
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($sql);
 
             // bind the parameters
             $stmt->bindParam(':weapon_type', $this->weapon_type);
@@ -132,7 +132,7 @@ class Weapons
 
         try{
             // prepare the statement
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($sql);
 
             // execute the query
             $stmt->execute();
@@ -152,7 +152,7 @@ class Weapons
 
         try{
             // prepare the statement
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($sql);
 
             // bind the parameters
             $stmt->bindParam(':weapon_id', $this->weapon_id);
@@ -179,7 +179,7 @@ class Weapons
 
         try{
             // prepare the statement
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($sql);
 
             // bind the parameters
             $stmt->bindParam(':weapon_type', $this->weapon_type);
@@ -205,7 +205,7 @@ class Weapons
 
         try{
             // prepare the statement
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->conn->prepare($sql);
 
             // bind the parameters
             $stmt->bindParam(':weapon_id', $this->weapon_id);
